@@ -1,0 +1,182 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      9-13-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     This is the Edit page, uses bootstrap form components and has a re-submit applicaiton button at the bottom.
+-->
+
+<h1 class="text-center">TA Application Form</h1>
+<br />
+
+<form>
+    <!-- Resume input -->
+    <div class="form-group row">
+        <label for="inputResume" class="col-sm-2 col-form-label">Resume</label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <h4>Contact</h4>
+
+    <!-- Full name input-->
+    <div class="form-group row">
+        <label for="inputFullName" class="col-sm-2 col-form-label">Full Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputFullName">
+        </div>
+    </div>
+
+    <!-- UID input-->
+    <div class="form-group row">
+        <label for="inputUID" class="col-sm-2 col-form-label">uID</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputUID" placeholder="u123456">
+        </div>
+    </div>
+
+    <!-- Email input -->
+    <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3">
+        </div>
+    </div>
+
+    <!-- Phone number input -->
+    <div class="form-group row">
+        <label for="inputPhone" class="col-sm-2 col-form-label">Phone Number</label>
+        <div class="col-sm-10">
+            <input type="tel" class="form-control" id="inputPhone">
+        </div>
+    </div>
+
+    <br />
+    <h4>Academic Info</h4>
+
+    <!-- GPA input -->
+    <div class="form-group row">
+        <label for="inputGPA" class="col-sm-2 col-form-label">GPA (4.0 Scale)</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="inputGPA">
+        </div>
+    </div>
+
+    <!-- Graduate status radio button-->
+    <fieldset class="form-group">
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Graduate Status</legend>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                        Graduate
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label class="form-check-label" for="gridRadios2">
+                        Undergraduate
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label class="form-check-label" for="gridRadios2">
+                        Not a student at the U
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Semester completed input -->
+    <div class="form-group row">
+        <label for="inputSemesters" class="col-sm-2 col-form-label">Semesters Completed</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="inputSemesters">
+        </div>
+    </div>
+
+    <!-- Upcoming semester credit hours input -->
+    <div class="form-group row">
+        <label for="inputCreditHours" class="col-sm-2 col-form-label">Upcoming Semester Credit Hours</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="inputCreditHours">
+        </div>
+    </div>
+
+    <!-- Couses interested in TAing input -->
+    <div class="form-group row">
+        <label for="inputCourses" class="col-sm-2 col-form-label">Courses Interested in TAing</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="inputCourses" rows="3"></textarea>
+        </div>
+    </div>
+
+    <br />
+    <h4>Additional Information</h4>
+
+    <!-- Working hours input -->
+    <div class="form-group row">
+        <label for="inputWorkHours" class="col-sm-2 col-form-label">How many hours can you work per week?</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="inputWorkHours" placeholder="20">
+        </div>
+    </div>
+
+    <!-- Have you TA'd before radio buttons -->
+    <fieldset class="form-group">
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Have you been a TA before?</legend>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="yes" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="no">
+                    <label class="form-check-label" for="gridRadios2">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Cover letter input -->
+    <div class="form-group row">
+        <label for="inputCourses" class="col-sm-2 col-form-label">Personal Statement</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="inputOtherInfo" placeholder="Add a cover letter or anything else you would like to share." rows="5"></textarea>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- Submit button -->
+    <div class="form-group row">
+        <div class="col-md-10 align-items-center">
+            <button type="submit" class="btn btn-danger">Re-Submit Application</button>
+        </div>
+    </div>
+</form>
