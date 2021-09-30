@@ -4,93 +4,45 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<!-- Back to the list page button -->
+<a class="btn btn-primary" asp-area="" asp-controller="Applications" asp-action="List">Back to list</a>
 
-<div>
-    <h4>Application</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Degree)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Degree)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Program)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Program)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GPA)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GPA)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Hours)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Hours)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PersonalStatement)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PersonalStatement)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Semesters)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Semesters)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LinkedInURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LinkedInURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Resume)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Resume)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModificationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModificationDate)
-        </dd>
-    </dl>
+<div class="container w-50 mt-4 mb-0 p-3 d-flex justify-content-center">
+    <div class="card p-2 w-100 text-center">
+        <h1>Applicant</h1>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="container w-50 mt-0 mb-4 p-3 d-flex justify-content-center">
+    <div class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+            <button class="btn btn-secondary">
+                <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+            </button>
+            <span class="mt-3"><strong>@Html.DisplayFor(model => model.Name)</strong></span>
+            <span>@Html.DisplayFor(model => model.uID)</span>
+            <span>@Html.DisplayFor(model => model.Phone)</span>
+            <span>@Html.DisplayFor(model => model.Email)</span>
+            <span>@Html.DisplayFor(model => model.LinkedInURL)</span>
+
+            <div class=" d-flex mt-3">
+                <a class="btn btn-primary m-1" a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
+                <a class="btn btn-danger m-1" asp-action="Delete" asp-route-id="@Model.ID">Delete</a>
+            </div>
+
+            <div class="w-75 d-flex flex-column mt-3 text-center">
+                <span>In the @Html.DisplayFor(model => model.Program) program pursuing a @Html.DisplayFor(model => model.Degree) degree.</span>
+                <span>GPA: @Html.DisplayFor(model => model.GPA)</span>
+                <span>Looking to work @Html.DisplayFor(model => model.Hours) hrs/week</span>
+                <span>Completed @Html.DisplayFor(model => model.Semesters) semesters at Utah</span>
+                <h5 class="mt-3">Personal Statement</h5>
+                <span>@Html.DisplayFor(model => model.PersonalStatement)</span>
+
+            </div>
+
+            <div class=" px-2 rounded mt-4 date ">
+                <span>@Html.DisplayFor(model => model.ModificationDate)</span>
+            </div>
+        </div>
+    </div>
 </div>

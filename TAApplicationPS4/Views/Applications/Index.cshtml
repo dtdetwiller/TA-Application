@@ -1,107 +1,48 @@
-﻿@model IEnumerable<TAApplicationPS4.Models.Application>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<TAApplicationPS4.Models.Application>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      09-29-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Degree)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Program)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GPA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonalStatement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Semesters)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LinkedInURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModificationDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Degree)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Program)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GPA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonalStatement)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Semesters)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LinkedInURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModificationDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+
+     Thia page shows a summary of information about the applicants base.
+-->
+
+<h1>Applicants Info</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Number of Applicants:</h5>
+                <h1 class="card-text">@ViewBag.totalApplicants</h1>
+
+
+                <h5 class="card-title">Average GPA of Applicants:</h5>
+                <h1 class="card-text">@ViewBag.avgGPA</h1>
+
+                <br />
+
+                <a class="btn btn-primary" asp-area="" asp-controller="Applications" asp-action="List">Click to see all applicants!</a>
+            </div>
+        </div>
+    </div>
+  </div>
+

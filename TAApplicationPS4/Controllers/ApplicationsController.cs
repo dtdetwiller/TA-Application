@@ -1,4 +1,21 @@
-﻿using System;
+﻿/**
+ * Author:    Daniel Detwiller
+ * Partner:   None
+ * Date:      09-29-2021
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Daniel Detwiller, certify that I wrote this code from scratch and did 
+ * not copy it in part or whole from another source.  Any references used 
+ * in the completion of the assignment are cited in my README file and in
+ * the appropriate method header.
+ *
+ * File Contents
+ *
+ *    This is the scaffolded Applicaitons controller.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,8 +36,26 @@ namespace TAApplicationPS4.Controllers
             _context = context;
         }
 
-        // GET: Applications
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
+        {
+            // Get the total number of applicants
+            ViewBag.totalApplicants = _context.Applications.Count();
+
+            // Get the averge gpa of applicants
+            var GPAs = _context.Applications.Where(app => app.GPA > 0f).Select(col => col.GPA).ToArray();
+            float totalOfGPAs = 0.0f;
+            foreach (float gpa in GPAs)
+            {
+                totalOfGPAs += gpa;
+            }
+            // Average GPA to 2 decimal places.
+            ViewBag.avgGPA = (totalOfGPAs / GPAs.Length).ToString("n2");
+
+            return View();
+        }
+
+        // GET: Applications (previously was Index)
+        public async Task<IActionResult> List()
         {
             return View(await _context.Applications.ToListAsync());
         }

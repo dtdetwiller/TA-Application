@@ -7,9 +7,10 @@ namespace TAApplicationPS4.Models
 {
     public class Application
     {
-        // Name of applicant
-        // University ID of the Applicant
         public int ID { get; set; }
+        // University ID of the Applicant
+        public string uID { get; set; }
+        // Name of applicant
         public string Name { get; set; }
         // Phone number
         public string Phone { get; set; }
