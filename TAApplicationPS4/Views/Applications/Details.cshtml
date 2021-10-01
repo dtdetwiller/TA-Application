@@ -4,6 +4,22 @@
     ViewData["Title"] = "Details";
 }
 
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      09-29-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+
+     This page cantains the details about an applicants and give the options to edit the details or 
+     delete the applicant.
+-->
+
 <!-- Back to the list page button -->
 <a class="btn btn-primary" asp-area="" asp-controller="Applications" asp-action="List">Back to list</a>
 
@@ -16,8 +32,8 @@
 <div class="container w-50 mt-0 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4">
         <div class=" image d-flex flex-column justify-content-center align-items-center">
-            <button class="btn btn-secondary">
-                <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+            <button class="btn">
+                <img src="/Uploads/blueman.png" height="120" width="120" />
             </button>
             <span class="mt-3"><strong>@Html.DisplayFor(model => model.Name)</strong></span>
             <span>@Html.DisplayFor(model => model.uID)</span>
@@ -31,10 +47,16 @@
             </div>
 
             <div class="w-75 d-flex flex-column mt-3 text-center">
-                <span>In the @Html.DisplayFor(model => model.Program) program pursuing a @Html.DisplayFor(model => model.Degree) degree.</span>
+                <span>Degree: @Html.DisplayFor(model => model.Degree)</span>
+                <span>Program: @Html.DisplayFor(model => model.Program)</span>
                 <span>GPA: @Html.DisplayFor(model => model.GPA)</span>
-                <span>Looking to work @Html.DisplayFor(model => model.Hours) hrs/week</span>
-                <span>Completed @Html.DisplayFor(model => model.Semesters) semesters at Utah</span>
+                <span>Hours to work: @Html.DisplayFor(model => model.Hours) hrs/week</span>
+                <span>Semesters Completed: @Html.DisplayFor(model => model.Semesters)</span>
+
+                <a href="/Uploads/DummyResume.pdf" download>
+                    Resume.pdf
+                </a>
+                
                 <h5 class="mt-3">Personal Statement</h5>
                 <span>@Html.DisplayFor(model => model.PersonalStatement)</span>
 

@@ -3,6 +3,20 @@
 @{
     ViewData["Title"] = "List";
 }
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      09-29-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+
+     This page shows a list of all the applicants, if you click on an applicants name it goes to their details page.
+ -->
 
 <h1>Application List</h1>
 
@@ -31,24 +45,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Program)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GPA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Program)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GPA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
