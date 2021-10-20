@@ -70,6 +70,7 @@ namespace TAApplicationPS4.Controllers
 
             var application = await _context.Applications
                 .FirstOrDefaultAsync(m => m.ID == id);
+
             if (application == null)
             {
                 return NotFound();
@@ -89,14 +90,26 @@ namespace TAApplicationPS4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Phone,Email,Degree,Program,GPA,Hours,PersonalStatement,Semesters,LinkedInURL,Resume,CreationDate,ModificationDate")] Application application)
+        public async Task<IActionResult> Create(
+            [Bind("ID,Name,Phone,Email,Degree,Program,GPA,Hours,PersonalStatement,Semesters,LinkedInURL,Resume,CreationDate,ModificationDate")] Application application)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(application);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(application);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(List));
+                }
             }
+            catch (DbUpdateException)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+            }
+
             return View(application);
         }
 
@@ -121,7 +134,7 @@ namespace TAApplicationPS4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Phone,Email,Degree,Program,GPA,Hours,PersonalStatement,Semesters,LinkedInURL,Resume,CreationDate,ModificationDate")] Application application)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,uID,Name,Phone,Email,Degree,Program,GPA,Hours,PersonalStatement,Semesters,LinkedInURL,Resume,CreationDate,ModificationDate")] Application application)
         {
             if (id != application.ID)
             {
@@ -146,13 +159,13 @@ namespace TAApplicationPS4.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(application);
         }
 
         // GET: Applications/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -160,10 +173,18 @@ namespace TAApplicationPS4.Controllers
             }
 
             var application = await _context.Applications
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (application == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
             }
 
             return View(application);
@@ -175,9 +196,22 @@ namespace TAApplicationPS4.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var application = await _context.Applications.FindAsync(id);
-            _context.Applications.Remove(application);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (application == null)
+            {
+                return RedirectToAction(nameof(List));
+            }
+
+            try
+            {
+                _context.Applications.Remove(application);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(List));
+            }
+            catch (DbUpdateException)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool ApplicationExists(int id)
