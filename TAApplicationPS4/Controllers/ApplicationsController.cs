@@ -99,7 +99,7 @@ namespace TAApplicationPS4.Controllers
                 {
                     _context.Add(application);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(List));
+                    return RedirectToAction(nameof(Details), new { application.ID });
                 }
             }
             catch (DbUpdateException)
@@ -159,7 +159,7 @@ namespace TAApplicationPS4.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(Details), new { application.ID });
             }
             return View(application);
         }
