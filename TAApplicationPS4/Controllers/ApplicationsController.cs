@@ -24,16 +24,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TAApplicationPS4.Data;
 using TAApplicationPS4.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using TAApplicationPS4.Areas.Identity.Data;
 
 namespace TAApplicationPS4.Controllers
 {
     public class ApplicationsController : Controller
     {
         private readonly TA_DB _context;
+        private readonly IConfiguration _configuration;
+        private readonly UserManager<TAUser> _um;
+        private readonly RoleManager<IdentityRole> _rm;
 
-        public ApplicationsController(TA_DB context)
+        public ApplicationsController(TA_DB context, IConfiguration configuration, UserManager<TAUser> um, RoleManager<IdentityRole> rm)
         {
             _context = context;
+            _um = um;
+            _rm = rm;
+            _configuration = configuration;
         }
 
         public ActionResult Index()

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using TAApplicationPS4.Data;
+using TAApplicationPS4.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace TAApplicationPS4
 {   
@@ -23,6 +25,7 @@ namespace TAApplicationPS4
             var host = CreateHostBuilder(args).Build();
 
             CreateDbIfNotExists(host);
+            CreateAndSeedUsersRolesDB(host);
 
             host.Run();
         }
@@ -40,6 +43,30 @@ namespace TAApplicationPS4
                 {
                     var context = services.GetRequiredService<TA_DB>();
                     TA_DB_Initializer.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred creating the DB.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates the UsersRolesDB database and seeds it.
+        /// </summary>
+        /// <param name="host"></param>
+        private static void CreateAndSeedUsersRolesDB(IHost host)
+        {
+            using(var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<TAUsersRolesDB>();
+                    UserManager<TAUser> um = services.GetRequiredService<UserManager<TAUser>>();
+                    RoleManager<IdentityRole> rm = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    SeedUsersRolesDB.InitializeAsync(context, um, rm).Wait();
                 }
                 catch (Exception ex)
                 {
