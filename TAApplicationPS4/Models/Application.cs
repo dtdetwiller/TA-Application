@@ -55,6 +55,8 @@ namespace TAApplicationPS4.Models
         public DateTime CreationDate { get; set; }
         // Application modification date
         public DateTime? ModificationDate { get; set; }
+        // User ID
+        public string UserID { get; set; }
 
     }
 }

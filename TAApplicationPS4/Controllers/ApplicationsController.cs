@@ -27,9 +27,11 @@ using TAApplicationPS4.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using TAApplicationPS4.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TAApplicationPS4.Controllers
 {
+    [Authorize]
     public class ApplicationsController : Controller
     {
         private readonly TA_DB _context;

@@ -10,7 +10,7 @@ namespace TAApplicationPS4.Areas.Identity.Data
     public class SeedUsersRolesDB
     {
 
-        public static async Task InitializeAsync(TAUsersRolesDB db, UserManager<TAUser> um, RoleManager<IdentityRole> rm)
+        public static async Task InitializeAsync(TAUsersRolesDB db, TA_DB TAdb, UserManager<TAUser> um, RoleManager<IdentityRole> rm)
         {
             // This makes sure that the database has been created.
             db.Database.EnsureCreated();
@@ -54,6 +54,29 @@ namespace TAApplicationPS4.Areas.Identity.Data
                 else if (u.UserName == "professor@utah.edu")
                 {
                     await um.AddToRoleAsync(u, "Professor");
+                }
+                // Creates an application for these users.
+                else if (u.UserName == "u0000001@utah.edu" || u.UserName == "u0000002@utah.edu")
+                {
+                    var app = new Application
+                    {
+                        UserID = u.Id,
+                        Name = u.UserName,
+                        uID = "u0000000",
+                        Program = "CS",
+                        GPA = 3.7f,
+                        Hours = 20,
+                        Phone = "(603) 717-5221",
+                        Email = u.Email,
+                        Degree = "BS",
+                        LinkedInURL = "https://www.linkedin.com/",
+                        PersonalStatement = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque egestas nisl a justo porttitor hendrerit. " +
+                    "Morbi imperdiet eu mauris sed egestas. Integer rhoncus auctor nisi sed ornare. Integer non sagittis leo, vitae tempus quam. Cras " +
+                    "consequat ante sed magna sodales, sed mollis velit placerat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec bibendum non massa at volutpat."
+                    };
+
+                    TAdb.Applications.Add(app);
+                    await um.AddToRoleAsync(u, "Applicant");
                 }
                 else
                 {
