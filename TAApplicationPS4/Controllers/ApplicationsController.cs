@@ -1,7 +1,7 @@
 ﻿/**
  * Author:    Daniel Detwiller
  * Partner:   None
- * Date:      09-29-2021
+ * Date:      10-25-2021
  * Course:    CS 4540, University of Utah, School of Computing
  * Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
  *
@@ -12,7 +12,7 @@
  *
  * File Contents
  *
- *    This is the scaffolded Applicaitons controller.
+ *    This is the scaffolded Admin controller.
  */
 
 using System;
@@ -47,10 +47,13 @@ namespace TAApplicationPS4.Controllers
             _configuration = configuration;
         }
 
-        public ActionResult Index()
+        [Authorize(Roles = "Administrator, Professor, Applicant")]
+        public async Task<IActionResult> Index()
         {
             // Get the total number of applicants
             ViewBag.totalApplicants = _context.Applications.Count();
+
+            ViewBag.userID = _um.GetUserId(this.User);
 
             // Get the averge gpa of applicants
             var GPAs = _context.Applications.Where(app => app.GPA > 0f).Select(col => col.GPA).ToArray();
@@ -62,10 +65,11 @@ namespace TAApplicationPS4.Controllers
             // Average GPA to 2 decimal places.
             ViewBag.avgGPA = (totalOfGPAs / GPAs.Length).ToString("n2");
 
-            return View();
+            return View(await _context.Applications.ToListAsync());
         }
 
         // GET: Applications (previously was Index)
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> List()
         {
             return View(await _context.Applications.ToListAsync());
@@ -108,6 +112,9 @@ namespace TAApplicationPS4.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Link the user ID with it's applciation.
+                    var id = _um.GetUserId(this.User);
+                    application.UserID = id;
                     _context.Add(application);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Details), new { application.ID });
@@ -125,6 +132,7 @@ namespace TAApplicationPS4.Controllers
         }
 
         // GET: Applications/Edit/5
+        [Authorize(Roles = "Administrator, Applicant")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -137,7 +145,15 @@ namespace TAApplicationPS4.Controllers
             {
                 return NotFound();
             }
-            return View(application);
+
+            if (application.UserID == _um.GetUserId(this.User) || User.IsInRole("Administrator"))
+            {
+                return View(application);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: Applications/Edit/5

@@ -63,10 +63,11 @@ namespace TAApplicationPS4
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<TAUsersRolesDB>();
+                    var context = services.GetRequiredService<TA_DB>();
+                    var usersRolesDB = services.GetRequiredService<TAUsersRolesDB>();
                     UserManager<TAUser> um = services.GetRequiredService<UserManager<TAUser>>();
                     RoleManager<IdentityRole> rm = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    SeedUsersRolesDB.InitializeAsync(context, um, rm).Wait();
+                    SeedUsersRolesDB.InitializeAsync(usersRolesDB, context, um, rm).Wait();
                 }
                 catch (Exception ex)
                 {

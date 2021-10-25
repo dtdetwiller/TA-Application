@@ -1,0 +1,118 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      10-25-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+
+     This is the admin page where only admins can access it and change the roles of all the other users.
+-->
+
+<!-- Back to the list page button -->
+
+@using Microsoft.AspNetCore.Identity
+@using TAApplicationPS4.Areas.Identity.Data
+@inject UserManager<TAUser> um
+
+@{
+    var users = um.Users.ToList();
+}
+
+@section Scripts
+{
+    <!-- JavaScript file -->
+    <script src="~/js/admin.js"></script>
+    
+    <!-- JQuery -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    
+    <!-- Data tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    
+    <!-- Sweet alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}
+
+
+<table id="admin_table" class="display">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Administrator</th>
+            <th>Professor</th>
+            <th>Applicant</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ 
+            var i = 0;
+        }  
+        @foreach (TAUser user in @users)
+        {
+        <tr>
+                <td>@user.UserName</td>
+                <td>
+                    @if (await um.IsInRoleAsync(user, "Administrator"))
+                    {
+                        <div class="custom-control custom-switch">
+                            <input onchange="triggerSwal('@user.Id', 'Administrator', 'adminSwitch-@i')" type="checkbox" class="custom-control-input" id="adminSwitch-@i" checked>
+                            <label class="custom-control-label" for="adminSwitch-@i"></label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="custom-control custom-switch">
+                            <input onchange="triggerSwal('@user.Id', 'Administrator', 'adminSwitch-@i')" type="checkbox" class="custom-control-input" id="adminSwitch-@i">
+                            <label class="custom-control-label" for="adminSwitch-@i"></label>
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (await um.IsInRoleAsync(user, "Professor"))
+                    {
+                        <div class="custom-control custom-switch">
+                            <input onchange="triggerSwal('@user.Id', 'Professor', 'professorSwitch-@i')" type="checkbox" class="custom-control-input" id="professorSwitch-@i" checked>
+                            <label class="custom-control-label" for="professorSwitch-@i"></label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="custom-control custom-switch">
+                            <input onchange="triggerSwal('@user.Id', 'Professor', 'professorSwitch-@i')" type="checkbox" class="custom-control-input" id="professorSwitch-@i">
+                            <label class="custom-control-label" for="professorSwitch-@i"></label>
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (await um.IsInRoleAsync(user, "Applicant"))
+                    {
+                        <div class="custom-control custom-switch">
+                            <input onchange="triggerSwal'@user.Id', 'Applicant', 'applicantSwitch-@i')" type="checkbox" class="custom-control-input" id="applicantSwitch-@i" checked>
+                            <label class="custom-control-label" for="applicantSwitch-@i"></label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="custom-control custom-switch">
+                            <input onchange="triggerSwal('@user.Id', 'Applicant', 'applicantSwitch-@i')" type="checkbox" class="custom-control-input" id="applicantSwitch-@i">
+                            <label class="custom-control-label" for="applicantSwitch-@i"></label>
+                        </div>
+                    }
+                </td>
+            @{ 
+                i++;
+            }
+        </tr>
+       }
+    </tbody>
+</table>

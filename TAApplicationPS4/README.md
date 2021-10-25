@@ -10,9 +10,7 @@ Version: Homework 5
 
 Comments to Evaluators:
 
-  I realized I had a bunch of issues with my PS4 after it was graded so I spent fall break fixing that and didn't finish
-  until Monday this week. That is why I am so behind on PS5. I am submitting it half complete, but I am going to keep working on it through
-  the next days until it is complete.
+  The EC2 instance should be fixed now.
 
 Assignment Specific Write-up:
 
@@ -33,6 +31,8 @@ Acknowledgements:
 References:
 
    1. All styling is from Bootstrap.
+   2. Datatables - https://datatables.net/
+   3. Sweet Alert 2 - https://sweetalert2.github.io/
 
 UI/UX choices:
 	- I used boostrap to style all the pages.

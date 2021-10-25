@@ -4,11 +4,27 @@
 @inject SignInManager<TAUser> SignInManager
 @inject UserManager<TAUser> UserManager
 
+@{ 
+
+    // Get the role to display on the navbar.
+    TAUser user = await UserManager.GetUserAsync(User);
+    var role = "Applicant";
+
+    if (user != null)
+    {
+        if (await UserManager.IsInRoleAsync(user, "Administrator"))
+            role = "Admin";
+        else if (await UserManager.IsInRoleAsync(user, "Professor"))
+            role = "Professor";
+    }
+}
+
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        <!-- Display the role and name of the user next to the logout button -->
+        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">(@role) @UserManager.GetUserName(User)</a>
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

@@ -25,27 +25,82 @@
         - Average GPA
 -->
 
-<h1>Applicants Info</h1>
+@{
+    if (User.IsInRole("Applicant"))
+    {
+        // Check if they have already created an application.
+        bool flag = false;
+        var app = new Application();
+        foreach (var a in Model)
+        {
+            if (ViewBag.userID == a.UserID)
+            {
+                app = a;
+                flag = true;
+                break;
+            }
+        }
 
-<hr />
+        // If they have created an application
+        if (flag)
+        {
+            <h1> Welcome Back! </h1>
+            <hr />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="card-title">You have already submitted an application.</h1>
+                            <br />
+                            <h5 class="card-text">Click the button to edit it.</h5>
+
+                            <a class="btn btn-primary" a asp-action="Edit" asp-route-id="@app.ID">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        // If they don't have an application.
+        else
+        {
+            <h1> Hello! </h1>
+            <hr />
+
+            <h3>Would you like to apply to be a TA?</h3>
+            <br />
+            <p> Click the button to apply!</p>
+            <a class="btn btn-primary" a asp-action="Create">Apply</a>
+        }
+    }
+    else if (User.IsInRole("Administrator"))
+    {
+        <h1>Applicants Info</h1>
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Number of Applicants:</h5>
+                        <h1 class="card-text">@ViewBag.totalApplicants</h1>
 
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Total Number of Applicants:</h5>
-                <h1 class="card-text">@ViewBag.totalApplicants</h1>
+                        <h5 class="card-title">Average GPA of Applicants:</h5>
+                        <h1 class="card-text">@ViewBag.avgGPA</h1>
 
+                        <br />
 
-                <h5 class="card-title">Average GPA of Applicants:</h5>
-                <h1 class="card-text">@ViewBag.avgGPA</h1>
-
-                <br />
-
-                <a class="btn btn-primary" asp-area="" asp-controller="Applications" asp-action="List">Click to see all applicants!</a>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Applications" asp-action="List">Click to see all applicants!</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-  </div>
+    }
+    else if (User.IsInRole("Professor"))
+    {
+        <h1 class="welcome"> Hey Professor, </h1>
+        <p> You know you're not an applciant, right? Are you lost? </p>
+    }
+}
 

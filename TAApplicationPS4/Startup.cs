@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using TAApplicationPS4.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using TAApplicationPS4.Services;
 
 namespace TAApplicationPS4
 {
@@ -25,8 +27,14 @@ namespace TAApplicationPS4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TA_DB>(options =>
+            services.AddDbContext<TA_DB>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // requires
+            // using Microsoft.AspNetCore.Identity.UI.Services;
+            // using WebPWrecover.Services;
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
