@@ -4,7 +4,7 @@ Date:      10-21-2021
 Course:    CS 4540, University of Utah, School of Computing
 Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
 
-Deployed URL:  ec2-54-234-241-10.compute-1.amazonaws.com
+Deployed URL:  ec2-3-85-227-30.compute-1.amazonaws.com
 Github Page:   https://github.com/uofu-cs4540-fall2021/ps4---new-ta-application-dandetwiller
 Version: Homework 5
 
