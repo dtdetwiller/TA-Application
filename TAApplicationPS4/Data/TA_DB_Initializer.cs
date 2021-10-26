@@ -1,4 +1,21 @@
-﻿using System;
+﻿/**
+ * Author:    Daniel Detwiller
+ * Partner:   None
+ * Date:      10-25-2021
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Daniel Detwiller, certify that I wrote this code from scratch and did 
+ * not copy it in part or whole from another source.  Any references used 
+ * in the completion of the assignment are cited in my README file and in
+ * the appropriate method header.
+ *
+ * File Contents
+ *
+ *    This is the database initializer and where all the seeding is done for applications and courses.
+ */
+
+using System;
 using System.Linq;
 using TAApplicationPS4.Models;
 
@@ -62,6 +79,38 @@ namespace TAApplicationPS4.Data
 
             foreach (Application a in applicaitons)
                 db.Applications.Add(a);
+
+            // Save the changes to the database.
+            db.SaveChanges();
+
+            if (db.Courses.Any())
+                return; // DB has been seeded.
+            
+            var courses = new Course[]
+            {
+                new Course{Semester="Spring", Year=2022, Title="Introduction to Object-Oriented Programming", Department="CS", CourseNumber=1410, Section="001",
+                    Description="The second course required for students intending to major in computer science and computer engineering. Introduction to the engineering and mathematical skills required to effectively program computers, and to the range of issues confronted by computer scientists. Roles of procedural and data abstraction in decomposing programs into manageable pieces. Introduction to object-oriented programming. Extensive programming exercises that involve the application of elementary software engineering techniques.",
+                ProfessorUNID="dejohnso", ProfessorName="David Johnson", TimeDays="MoWeFr 10:45AM - 11:35AM", Location="GC 1900", Credits=4, Enrolled=150, Note="Need more TAs!"},
+                
+                new Course{Semester="Spring", Year=2022, Title="Introduction to Algorithms & Data Structures", Department="CS", CourseNumber=2420, Section="001",
+                    Description = "This course provides an introduction to the problem of engineering computational efficiency into programs. Students will learn about classical algorithms (including sorting, searching, and graph traversal), data structures (including stacks, queues, linked lists, trees, hash tables, and graphs), and analysis of program space and time requirements. Students will complete extensive programming exercises that require the application of elementary techniques from software engineering.",
+                ProfessorUNID = "parker", ProfessorName = "Erin Parker", TimeDays = "TuTh 12:25PM - 1:45PM", Location = "GC 1900", Credits = 4, Enrolled = 150, Note = ""},
+
+                new Course{Semester="Spring", Year=2022, Title="Software Practice", Department="CS", CourseNumber=3500, Section="001",
+                    Description = "Practical exposure to the process of creating large software systems, including requirements specifications, design, implementation, testing, and maintenance. Emphasis on software process, software tools (debuggers, profilers, source code repositories, test harnesses), software engineering techniques (time management, code, and documentation standards, source code management, object-oriented analysis and design), and team development practice. Much of the work will be in groups and will involve modifying preexisting software systems.",
+                ProfessorUNID = "germain", ProfessorName = "H. James De St Germain", TimeDays = "TuTh 2:00PM - 3:20PM", Location = "WEB L104", Credits = 4, Enrolled = 150, Note = ""},
+
+                new Course{Semester="Spring", Year=2022, Title="Software Practice II", Department="CS", CourseNumber=3505, Section="001",
+                    Description = "An in-depth study of traditional software development (using UML) from inception through implementation.  The entire class is team-based, and will include a project that uses an agile process.",
+                ProfessorUNID = "dejohnso", ProfessorName = "David Johnson", TimeDays = "TuTh 12:25PM - 1:45PM", Location = "WEB L104", Credits = 3, Enrolled = 150, Note = ""},
+
+                new Course{Semester="Spring", Year=2022, Title="Computer Systems", Department="CS", CourseNumber=4400, Section="001",
+                    Description = "Introduction to computer systems from a programmer's point of view.  Machine level representations of programs, optimizing program performance, memory hierarchy, linking, exceptional control flow, measuring program performance, virtual memory, concurrent programming with threads, network programming.",
+                ProfessorUNID = "benjones", ProfessorName = "Ben Jones", TimeDays = "MoWe 11:50AM - 1:10PM", Location = "HPR E 206", Credits = 3, Enrolled = 150, Note = "Need more TAs!"},
+            };
+
+            foreach (Course c in courses)
+                db.Courses.Add(c);
 
             // Save the changes to the database.
             db.SaveChanges();

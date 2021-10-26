@@ -1,0 +1,118 @@
+﻿@model IEnumerable<TAApplicationPS4.Models.Course>
+@using Microsoft.AspNetCore.Identity
+@using TAApplicationPS4.Areas.Identity.Data
+@inject UserManager<TAUser> um
+
+@{
+    ViewData["Title"] = "Index";
+
+    TAUser user = await um.GetUserAsync(User);
+}
+
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      10-25-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+
+     This is the list page for a course.
+-->
+<!-- Back to the list page button -->
+
+@section Scripts
+{
+    <!-- JavaScript file -->
+    <script src="~/js/courses.js"></script>
+
+    <!-- JQuery -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+}
+<h1>List of Courses</h1>
+
+@if (await um.IsInRoleAsync(user, "Administrator"))
+{
+    <p>
+        <a class="btn btn-primary" asp-controller="Courses" asp-action="Create">Create New Course</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Semester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfessorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enrolled)
+            </th>
+            @if (await um.IsInRoleAsync(user, "Administrator"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var i = 0;
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfessorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Enrolled)
+                </td>
+                @if (await um.IsInRoleAsync(user, "Administrator"))
+                {
+                    <td>
+
+                        <label for="exampleFormControlTextarea1" class="form-label"></label>
+                        <textarea class="form-control" id="noteTextArea-@i" rows="3">@Html.DisplayFor(modelItem => item.Note)</textarea>
+                        <button onclick="saveNote('noteTextArea-@i', '@Html.DisplayFor(modelItem => item.CourseID)')" type="button" class="btn btn-secondary btn-sm mt-1">Save</button>
+                    </td>
+                }
+                <td>
+
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.CourseID">Details</a>
+                </td>
+            </tr>
+
+            i++;
+        }
+    </tbody>
+</table>

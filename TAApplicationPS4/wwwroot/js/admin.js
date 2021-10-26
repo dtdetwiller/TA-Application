@@ -13,7 +13,6 @@ function triggerSwal(userid, role, elementID)
         userid: userid,
         role: role,
         elementID: elementID
-        //toggleSwitch: toggleSwitch
     };
 
     Swal.fire({

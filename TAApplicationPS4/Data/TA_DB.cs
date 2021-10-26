@@ -32,6 +32,7 @@ namespace TAApplicationPS4.Data
         }
 
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         /// <summary>
         /// This method creates singular table names in the DbContext
@@ -39,7 +40,8 @@ namespace TAApplicationPS4.Data
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Application>().ToTable("Application");
+            modelBuilder.Entity<Application>().ToTable("Applications");
+            modelBuilder.Entity<Course>().ToTable("Courses");
         }
     }
 }

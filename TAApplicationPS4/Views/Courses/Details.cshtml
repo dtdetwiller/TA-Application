@@ -1,0 +1,132 @@
+﻿@model TAApplicationPS4.Models.Course
+@using Microsoft.AspNetCore.Identity
+@using TAApplicationPS4.Areas.Identity.Data
+@inject UserManager<TAUser> um
+
+@{
+    ViewData["Title"] = "Details";
+
+    TAUser user = await um.GetUserAsync(User);
+}
+
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      10-25-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+
+     This is the details page for a course.
+-->
+<!-- Back to the list page button -->
+
+<h1>Details</h1>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Semester)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Semester)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CourseNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Section)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProfessorUNID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProfessorUNID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProfessorName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProfessorName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TimeDays)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TimeDays)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Credits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Credits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Enrolled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Enrolled)
+        </dd>
+        @if (await um.IsInRoleAsync(user, "Administrator"))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Note)
+            </dt>
+            <dd class="col-sm-10">
+                <label for="exampleFormControlTextarea2" class="control-label"></label>
+                <textarea asp-for="Note" class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" value="@Html.DisplayFor(model => model.Note)" disabled></textarea>
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    @if (await um.IsInRoleAsync(user, "Administrator"))
+    {
+        <a class="btn btn-primary" asp-controller="Courses" asp-action="List">Back to List</a>
+        <a class="btn btn-primary" asp-controller="Courses" asp-action="Edit" asp-route-id="@Model.CourseID">Edit</a>
+        <a class="btn btn-danger" asp-controller="Courses" asp-action="Delete" asp-route-id="@Model.CourseID">Delete</a>
+    }
+</div>
