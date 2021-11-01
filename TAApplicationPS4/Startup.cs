@@ -30,27 +30,28 @@ namespace TAApplicationPS4
             services.AddDbContext<TA_DB>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+
             // requires
             // using Microsoft.AspNetCore.Identity.UI.Services;
             // using WebPWrecover.Services;
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddControllersWithViews();
+            services.AddSingleton<IConfiguration>(Configuration);
+
             //Google authentication
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
                     IConfigurationSection googleAuthNSection =
-                    Configuration.GetSection("Authentication:Google");
+                        Configuration.GetSection("Authentication:Google");
 
                     options.ClientId = googleAuthNSection["ClientId"];
                     options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
-
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddControllersWithViews();
-            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

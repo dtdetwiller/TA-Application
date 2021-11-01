@@ -26,5 +26,9 @@ namespace TAApplicationPS4.Areas.Identity.Data
     // Add profile data for application users by adding properties to the TAUser class
     public class TAUser : IdentityUser
     {
+        // The TAUser Unid
+        public string Unid { get; set; }
+        // The name of the user
+        public string Name { get; set; }
     }
 }

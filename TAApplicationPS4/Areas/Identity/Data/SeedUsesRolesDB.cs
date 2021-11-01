@@ -32,6 +32,9 @@ namespace TAApplicationPS4.Areas.Identity.Data
             // This makes sure that the database has been created.
             db.Database.EnsureCreated();
 
+            if (db.Roles.Any())
+                return;
+
             // Create roles, create async the roles
             IdentityRole[] roles = new IdentityRole[]
             {
@@ -44,6 +47,9 @@ namespace TAApplicationPS4.Areas.Identity.Data
             {
                 await rm.CreateAsync(r);
             }
+
+            if (db.Users.Any())
+                return;
 
             // Create users
             TAUser[] users = new TAUser[]
