@@ -42,7 +42,8 @@ namespace TAApplicationPS4
                 try
                 {
                     var context = services.GetRequiredService<TA_DB>();
-                    TA_DB_Initializer.Initialize(context);
+                    var usersRolesDB = services.GetRequiredService<TAUsersRolesDB>();
+                    TA_DB_Initializer.Initialize(context, usersRolesDB);
                 }
                 catch (Exception ex)
                 {

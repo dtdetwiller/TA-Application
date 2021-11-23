@@ -1,0 +1,35 @@
+﻿@model TAApplicationPS4.Models.TimeSlots
+@using TAApplicationPS4.Areas.Identity.Data;
+@using Microsoft.AspNetCore.Identity;
+
+@section Scripts{
+
+    <!-- PIXI Cloud flare-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.0/browser/pixi.min.js"></script>
+
+    <!-- JavaScript -->
+    <script src="~/js/availability.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/setup.js"></script>
+
+    <!-- JQuery -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+}
+
+<h2>Availability for @ViewBag.name </h2>
+
+
+<p>
+    Please indicate all times that you <b>will be</b> available during the week.  This information is used by
+    the hiring committee and professors to determine class coverage, lab coverage, office hour coverage, etc.
+    (Note: Any work necessary on the weekends will be up to you and your professor to negotiate.)
+</p>
+<p>
+    If your schedule changes, please come back and update this record.
+</p>
+
+<div 
+     id="canvas_div" 
+     onload="retrieveData(@Model.Monday, @Model.Tuesday, @Model.Wednesday, @Model.Thursday, @Model.Friday)">
+
+</div>

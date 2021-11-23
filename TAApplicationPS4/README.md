@@ -1,17 +1,16 @@
 ﻿Author:    Daniel Detwiller
 Partner:   None
-Date:      10-25-2021
+Date:      11-22-2021
 Course:    CS 4540, University of Utah, School of Computing
 Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
 
-Deployed URL:  https://3.221.225.247.nip.io/
+Deployed URL:  N/A
 Github Page:   https://github.com/uofu-cs4540-fall2021/ps4---new-ta-application-dandetwiller
-Version: Homework 5
+Version: Homework 8
 
 Comments to Evaluators:
 
-  Need to come to office hours tomorrow to figure out how to add the unid for a user registering with google. Also, I just realized there is something
-  wrong with my AWS instance. It won't even connect before publishing, saying something about a 500 error.
+  Will be coming to office ours for help on this one, I fell behind this week.
 
 Assignment Specific Write-up:
 
