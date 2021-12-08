@@ -117,39 +117,6 @@ namespace TAApplicationPS4.Data
             // Save the changes to the database.
             db.SaveChanges();
 
-            if (db.TimeSlots.Any())
-                return; // DB has been seeded.
-
-            var timeSlotsForu0000000 = new TimeSlots();
-
-            foreach (TAUser u in usersRolesDB.Users)
-            {
-                if (u.Email == "u0000000@utah.edu")
-                {
-                    
-                    // seed 8:00am to noon
-                    for (int i = 0; i < 16; i++)
-                    {
-                        timeSlotsForu0000000.Monday.Remove(i, 1).Insert(i, "Y");
-                        timeSlotsForu0000000.Friday.Remove(i, 1).Insert(i, "Y");
-                    }
-
-                    // seed noon to 5:00pm
-                    for (int i = 16; i < 36; i++)
-                    {
-                        timeSlotsForu0000000.Tuesday.Remove(i, 1).Insert(i, "Y");
-                        timeSlotsForu0000000.Thursday.Remove(i, 1).Insert(i, "Y");
-                    }
-
-                    timeSlotsForu0000000.UserID = u.Id;
-                    break;
-                }
-            }
-
-            // Add the timeslot
-            db.TimeSlots.Add(timeSlotsForu0000000);
-            // Save the db changes
-            db.SaveChanges();
         }
     }
 }

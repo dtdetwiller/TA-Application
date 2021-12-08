@@ -17,6 +17,7 @@
 
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TAApplicationPS4.Data;
@@ -104,6 +105,38 @@ namespace TAApplicationPS4.Areas.Identity.Data
                 else
                 {
                     await um.AddToRoleAsync(u, "Applicant");
+                }
+
+
+                if (u.UserName == "u0000000@utah.edu")
+                {
+                    var timeSlot = new TimeSlots()
+                    {
+                        UserID = u.Id
+                    };
+
+                    var timeSlots = TAdb.TimeSlots.ToList();
+                    Debug.WriteLine("Test 11111111");
+
+                    // seed 8:00am to noon
+                    timeSlot.Monday = "YYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
+                    timeSlot.Friday = "YYYYYYYYYYYYYYYYNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
+
+                    // seed noon to 5:00pm
+                    timeSlot.Tuesday = "NNNNNNNNNNNNNNNNYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNN";
+                    timeSlot.Thursday = "NNNNNNNNNNNNNNNNYYYYYYYYYYYYYYYYYYYYNNNNNNNNNNNN";
+
+                    TAdb.TimeSlots.Add(timeSlot);
+                }
+                else
+                {
+                    // Initialize this users time slots
+                    var timeSlot = new TimeSlots
+                    {
+                        UserID = u.Id
+                    };
+
+                    TAdb.TimeSlots.Add(timeSlot);
                 }
             }
 

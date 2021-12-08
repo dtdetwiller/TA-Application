@@ -10,7 +10,7 @@ Version: Homework 8
 
 Comments to Evaluators:
 
-  Will be coming to office ours for help on this one, I fell behind this week.
+  Database Names: TAApplication1 and TAUsersRolesDB
 
 Assignment Specific Write-up:
 
@@ -33,7 +33,8 @@ References:
    1. All styling is from Bootstrap.
    2. Datatables - https://datatables.net/
    3. Sweet Alert 2 - https://sweetalert2.github.io/
-   3. Google Authentication
+   4. Google Authentication
+   5. PIXI.js library
 
 UI/UX choices:
 	- I used boostrap to style all the pages.

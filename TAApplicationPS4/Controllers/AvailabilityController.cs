@@ -41,6 +41,8 @@ namespace TAApplicationPS4.Controllers
             // Get the timeslot for this user
             var timeSlots = _context.TimeSlots.ToList();
             var userid = _um.GetUserId(this.User);
+
+            ViewBag.userid = userid;
             TimeSlots timeSlot = new();
             bool flag = false;
 
@@ -60,21 +62,40 @@ namespace TAApplicationPS4.Controllers
             return View(timeSlot);
         }
 
-        public async Task<IActionResult> SetSchedule()
+        /// <summary>
+        /// Gets the selected time slots from the javascript
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> GetSchedule(string userid, string monday, string tuesday, string wednesday, string thursday, string friday)
         {
+            //Debug.WriteLine(monday);
+            var timeSlots = _context.TimeSlots.ToList();
+            TimeSlots timeSlot = new();
+
+            foreach (TimeSlots t in timeSlots)
+            {
+                if (t.UserID == userid)
+                {
+                    timeSlot = t;
+                    break;
+                }
+            }
+
+            Debug.WriteLine(monday);
+            timeSlot.Monday = monday;
+            //Debug.WriteLine(timeSlot.Monday);
+            timeSlot.Tuesday = tuesday;
+            Debug.WriteLine(tuesday);
+            timeSlot.Wednesday = wednesday;
+            timeSlot.Thursday = thursday;
+            timeSlot.Friday = friday;
+
+            await _context.SaveChangesAsync();
 
             return Ok(new
             {
-               
-            });
-        }
-
-        public async Task<IActionResult> GetSchedule()
-        {
-
-            return Ok(new
-            {
-
+                message = "This worked",
+                input = $"{userid}, {monday}, {tuesday}, {wednesday}, {thursday}, {friday}"
             });
         }
     }
