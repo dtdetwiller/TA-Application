@@ -1,4 +1,19 @@
-﻿@model TAApplicationPS4.Models.TimeSlots
+﻿<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      11-22-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents:
+
+     This is the view for the availability page.
+-->
+
+@model TAApplicationPS4.Models.TimeSlots
 @using TAApplicationPS4.Areas.Identity.Data;
 @using Microsoft.AspNetCore.Identity;
 
@@ -32,7 +47,7 @@
 
     <div id="canvas_div"></div>
     <button onclick="updateAvailability('@ViewBag.userid')" class="btn btn-primary">Update Availability</button>
-    
+
     <!-- The spinner -->
     <button id="spinner" class="btn btn-primary" type="button" disabled>
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
