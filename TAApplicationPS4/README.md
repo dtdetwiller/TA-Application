@@ -35,6 +35,7 @@ References:
    3. Sweet Alert 2 - https://sweetalert2.github.io/
    4. Google Authentication
    5. PIXI.js library
+   6. NuGet CsvHelper package
 
 UI/UX choices:
 	- I used boostrap to style all the pages.

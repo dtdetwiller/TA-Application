@@ -85,7 +85,6 @@ namespace TAApplicationPS4.Controllers
         /// <returns></returns>
         public async Task<IActionResult> GetSchedule(string userid, string monday, string tuesday, string wednesday, string thursday, string friday)
         {
-            //Debug.WriteLine(monday);
             var timeSlots = _context.TimeSlots.ToList();
             TimeSlots timeSlot = new();
 
@@ -98,11 +97,8 @@ namespace TAApplicationPS4.Controllers
                 }
             }
 
-            Debug.WriteLine(monday);
             timeSlot.Monday = monday;
-            //Debug.WriteLine(timeSlot.Monday);
             timeSlot.Tuesday = tuesday;
-            Debug.WriteLine(tuesday);
             timeSlot.Wednesday = wednesday;
             timeSlot.Thursday = thursday;
             timeSlot.Friday = friday;

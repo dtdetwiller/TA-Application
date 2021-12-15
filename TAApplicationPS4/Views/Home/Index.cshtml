@@ -2,7 +2,65 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!--
+  Author:    Daniel Detwiller
+  Partner:   None
+  Date:      9-13-2021
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Daniel Detwiller - This work may not be copied for use in Academic Coursework.
+
+  I, Daniel Detwiller, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     This is the homepage, I have included a nice jumptron (Apply button doesn't work yet). I also included
+    some information cards underneath the jumpbotron.
+-->
+<!--Top of the homepage - Jumbotron-->
+<div class="jumbotron">
+    <h1 class="display-4">School of Computing - TA Application Site</h1>
+    <p class="lead">
+        Being a Teaching Assistant is a great way to earn money on campus, help other students, solidify your understanding of topics,
+        and make close connections with the faculty.
+    </p>
+    <hr class="my-4">
+    <p>
+        TAs grade, hold office hours to answer student questions, sometimes present laboratory material, etc. TAs should have
+        good communication skills and a desire to help other students.
+    </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Start your application</a>
+    </p>
+</div>
+
+<!-- Cards -->
+<div class="card-deck">
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Who can TA?</h5>
+            <p class="card-text">
+                TAs are selected from candidates at both the graduate and undergraduate level. TAs should be
+                very familiar with and quite good at the material covered in the class. In most cases, a TA should have previously taken the course and received an A grade.
+            </p>
+        </div>
+    </div>
+    <div class="card text-white bg-danger mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Information for International Students</h5>
+            <p class="card-text">
+                International students must pass the ITA workshop to verify their English communication skills.
+                Students should talk to Leslie LeFevre (leslie@cs.utah.edu) and/or Robert Barber (rbarber@cs.utah.edu) for information about the ITA workshop.
+            </p>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-body">
+            <h5 class="card-title">How much are TAs paid?</h5>
+            <p class="card-text">
+                Undergraduate TAs are typically paid $15 per hour in their first semester and expected to work up to 20 hours a week;
+                some TAs do work 'part time' for 10 or 15 hours. The actual amount of hours worked must be logged each week.
+            </p>
+        </div>
+    </div>
 </div>

@@ -34,6 +34,7 @@ namespace TAApplicationPS4.Data
         public DbSet<Application> Applications { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<TimeSlots> TimeSlots { get; set; }
+        public DbSet<EnrollmentOverTime> EnrollmentOverTime { get; set; }
 
         /// <summary>
         /// This method creates singular table names in the DbContext
@@ -44,6 +45,7 @@ namespace TAApplicationPS4.Data
             modelBuilder.Entity<Application>().ToTable("Applications");
             modelBuilder.Entity<Course>().ToTable("Courses");
             modelBuilder.Entity<TimeSlots>().ToTable("TimeSlots");
+            modelBuilder.Entity<EnrollmentOverTime>().ToTable("EnrollmentOverTime");
         }
     }
 }
