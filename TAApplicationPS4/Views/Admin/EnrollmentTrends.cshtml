@@ -10,7 +10,7 @@
 
   File Contents:
 
-     This is the entrollment data page that display the course enrollments on a highchart chart.
+     This is the enrollment data page that display the course enrollments on a highchart chart.
 -->
 <!-- Back to the list page button -->
 
@@ -44,12 +44,12 @@
 
 <h1 class="text-center mt-4 mb-5">Enrollment Trends</h1>
 
+
 <div class="row">
     <div class="col">
         <label for="inputCourse">Course</label>
         <select id="inputCourse" name="inputCourse" class="form-control">
-            <option selected>Choose...</option>
-            <option>CS 1400</option>
+            <option selected>CS 1400</option>
             <option>CS 1410</option>
             <option>CS 1420</option>
             <option>CS 2100</option>
@@ -66,11 +66,11 @@
     </div>
     <div class="col">
         <label class="control-label" for="startDate">Enrollment Start Date</label>
-        <input class="form-control" type="date" data-val="true" data-val-required="The enrollment start date field is required." id="startDate" name="startDate" value="">
+        <input class="form-control" type="date" value="2021-11-07" data-val="true" data-val-required="The enrollment start date field is required." id="startDate" name="startDate" value="">
     </div>
     <div class="col">
         <label class="control-label" for="endDate">Enrollment End Date</label>
-        <input class="form-control" type="date" data-val="true" data-val-required="The enrollment end date field is required." id="endDate" name="endDate" value="">
+        <input class="form-control" type="date" value="@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day" data-val="true" data-val-required="The enrollment end date field is required." id="endDate" name="endDate" value="">
     </div>
     <div class="col">
         <br />
